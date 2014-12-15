@@ -56,16 +56,21 @@ namespace Gemini.Modules.Shell.ViewModels
 			get { return _statusBar; }
 		}
 
-	    private ILayoutItem _currentActiveItem;
-	    public ILayoutItem CurrentActiveItem
+	    private ILayoutItem _activeLayoutItem;
+	    public ILayoutItem ActiveLayoutItem
 	    {
-	        get { return _currentActiveItem; }
+	        get { return _activeLayoutItem; }
 	        set
 	        {
-	            _currentActiveItem = value;
-                if (value is IDocument)
-                    ActivateItem((IDocument) value);
-                NotifyOfPropertyChange(() => CurrentActiveItem);
+	            if (ReferenceEquals(_activeLayoutItem, value))
+	                return;
+
+	            _activeLayoutItem = value;
+
+	            if (value is IDocument)
+	                ActivateItem((IDocument) value);
+
+	            NotifyOfPropertyChange(() => ActiveLayoutItem);
 	        }
 	    }
 
@@ -151,7 +156,7 @@ namespace Gemini.Modules.Shell.ViewModels
 
 	        // If after initialization no theme was loaded, load the default one
 	        if (_themeManager.CurrentTheme == null)
-	            _themeManager.SetCurrentTheme("Light");
+	            _themeManager.SetCurrentTheme(Properties.Settings.Default.ThemeName);
 
             _shellView = (IShellView) view;
 	        if (!HasPersistedState)
@@ -185,7 +190,7 @@ namespace Gemini.Modules.Shell.ViewModels
 		    else
 		        Tools.Add(model);
 		    model.IsSelected = true;
-	        CurrentActiveItem = model;
+	        ActiveLayoutItem = model;
 		}
 
 		public void OpenDocument(IDocument model)
@@ -203,26 +208,48 @@ namespace Gemini.Modules.Shell.ViewModels
             if (_closing)
                 return;
 
+            RaiseActiveDocumentChanging();
+
+            var currentActiveItem = ActiveItem;
+
+            base.ActivateItem(item);
+
+            if (!ReferenceEquals(item, currentActiveItem))
+                RaiseActiveDocumentChanged();
+        }
+
+	    private void RaiseActiveDocumentChanging()
+	    {
             var handler = ActiveDocumentChanging;
             if (handler != null)
                 handler(this, EventArgs.Empty);
+	    }
 
-            base.ActivateItem(item);
-        }
-
-        protected override void OnActivationProcessed(IDocument item, bool success)
-        {
+	    private void RaiseActiveDocumentChanged()
+	    {
             var handler = ActiveDocumentChanged;
             if (handler != null)
                 handler(this, EventArgs.Empty);
+	    }
 
-            if (CurrentActiveItem != item)
-                CurrentActiveItem = item;
+        protected override void OnActivationProcessed(IDocument item, bool success)
+        {
+            if (!ReferenceEquals(ActiveLayoutItem, item))
+                ActiveLayoutItem = item;
 
             base.OnActivationProcessed(item, success);
         }
 
-        protected override void OnDeactivate(bool close)
+	    public override void DeactivateItem(IDocument item, bool close)
+	    {
+	        RaiseActiveDocumentChanging();
+
+	        base.DeactivateItem(item, close);
+
+            RaiseActiveDocumentChanged();
+	    }
+
+	    protected override void OnDeactivate(bool close)
         {
             // Workaround for a complex bug that occurs when
             // (a) the window has multiple documents open, and

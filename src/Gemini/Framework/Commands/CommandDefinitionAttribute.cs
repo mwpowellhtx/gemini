@@ -5,10 +5,10 @@ namespace Gemini.Framework.Commands
 {
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
-    public class CommandHandlerAttribute : ExportAttribute
+    public class CommandDefinitionAttribute : ExportAttribute
     {
-        public CommandHandlerAttribute()
-            : base(typeof(ICommandHandler))
+        public CommandDefinitionAttribute()
+            : base(typeof(CommandDefinitionBase))
         {
             
         }

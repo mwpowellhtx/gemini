@@ -2,7 +2,7 @@
 {
     public interface ICommandUiItem
     {
-        CommandDefinition CommandDefinition { get; }
-        void Update(CommandHandler commandHandler);
+        CommandDefinitionBase CommandDefinition { get; }
+        void Update(CommandHandlerWrapper commandHandler);
     }
 }

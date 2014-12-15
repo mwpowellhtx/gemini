@@ -91,16 +91,21 @@
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Framework\Behaviors\BindableTreeViewSelectedItemBehavior.cs" />
     <Compile Include="Framework\Behaviors\CustomGlowWindowBehavior.cs" />
+    <Compile Include="Framework\Behaviors\KeyboardFocusBehavior.cs" />
+    <Compile Include="Framework\Behaviors\WindowOptionsBehavior.cs" />
     <Compile Include="Framework\Commands\Command.cs" />
     <Compile Include="Framework\Commands\CommandDefinition.cs" />
-    <Compile Include="Framework\Commands\CommandHandler.cs" />
+    <Compile Include="Framework\Commands\CommandDefinitionAttribute.cs" />
+    <Compile Include="Framework\Commands\CommandDefinitionBase.cs" />
+    <Compile Include="Framework\Commands\CommandHandlerWrapper.cs" />
+    <Compile Include="Framework\Commands\ICommandHandler.cs" />
     <Compile Include="Framework\Commands\CommandHandlerAttribute.cs" />
     <Compile Include="Framework\Commands\CommandKeyGestureService.cs" />
     <Compile Include="Framework\Commands\CommandListDefinition.cs" />
     <Compile Include="Framework\Commands\CommandRouter.cs" />
     <Compile Include="Framework\Commands\CommandService.cs" />
-    <Compile Include="Framework\Commands\ICommandHandlerMetadata.cs" />
     <Compile Include="Framework\Commands\ICommandKeyGestureService.cs" />
+    <Compile Include="Framework\Commands\ICommandRerouter.cs" />
     <Compile Include="Framework\Commands\ICommandService.cs" />
     <Compile Include="Framework\Commands\ICommandUiItem.cs" />
     <Compile Include="Framework\Commands\TargetableCommand.cs" />
@@ -116,7 +121,6 @@
     <Compile Include="Framework\Menus\MenuItemDefinition.cs" />
     <Compile Include="Framework\Menus\MenuItemGroupDefinition.cs" />
     <Compile Include="Framework\Menus\TextMenuItemDefinition.cs" />
-    <Compile Include="Framework\PropertyChangedBase.cs" />
     <Compile Include="Framework\Results\ShowDialogResult.cs" />
     <Compile Include="Framework\Services\EditorFileType.cs" />
     <Compile Include="Framework\Services\IMainWindow.cs" />
@@ -134,6 +138,7 @@
     <Compile Include="Framework\ToolBars\ToolBarItemDefinition.cs" />
     <Compile Include="Framework\ToolBars\ToolBarItemGroupDefinition.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
+    <Compile Include="Framework\Win32\NativeMethods.cs" />
     <Compile Include="Framework\WindowBase.cs" />
     <Compile Include="Framework\Controls\DynamicStyle.cs" />
     <Compile Include="Modules\MainMenu\Behaviors\MenuBehavior.cs" />
@@ -155,11 +160,11 @@
     <Compile Include="Modules\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandListDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\ExitCommandDefinition.cs" />
-    <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandHandler.cs" />
+    <Compile Include="Modules\Shell\Commands\SwitchToDocumentListCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\OpenFileCommandHandler.cs" />
-    <Compile Include="Modules\Shell\Commands\NewFileCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\NewFileCommandListDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\NewFileCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\OpenFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\ExitCommandHandler.cs" />
@@ -252,8 +257,6 @@
     </Compile>
     <Compile Include="Modules\UndoRedo\Commands\RedoCommandDefinition.cs" />
     <Compile Include="Modules\UndoRedo\Commands\UndoCommandDefinition.cs" />
-    <Compile Include="Modules\UndoRedo\Commands\RedoCommandHandler.cs" />
-    <Compile Include="Modules\UndoRedo\Commands\UndoCommandHandler.cs" />
     <Compile Include="Modules\UndoRedo\Commands\ViewHistoryCommandDefinition.cs" />
     <Compile Include="Modules\UndoRedo\Commands\ViewInspectorCommandHandler.cs" />
     <Compile Include="Modules\UndoRedo\Design\DesignTimeHistoryViewModel.cs" />

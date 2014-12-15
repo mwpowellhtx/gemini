@@ -1,6 +1,6 @@
 # Gemini
 
-[![Build status](https://ci.appveyor.com/api/projects/status/jwagos6igfdgx819/branch/master)](https://ci.appveyor.com/project/tgjones/gemini/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/jwagos6igfdgx819/branch/master?svg=true)](https://ci.appveyor.com/project/tgjones/gemini/branch/master) [![Issue Stats](http://www.issuestats.com/github/tgjones/gemini/badge/pr)](http://www.issuestats.com/github/tgjones/gemini) [![Issue Stats](http://www.issuestats.com/github/tgjones/gemini/badge/issue)](http://www.issuestats.com/github/tgjones/gemini) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/tgjones/gemini)
 
 ## What is this?
 

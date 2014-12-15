@@ -58,12 +58,12 @@ namespace Gemini.Modules.MainMenu.Models
             _listItems = new List<StandardMenuItem>();
         }
 
-        CommandDefinition ICommandUiItem.CommandDefinition
+        CommandDefinitionBase ICommandUiItem.CommandDefinition
         {
             get { return _command.CommandDefinition; }
         }
 
-        void ICommandUiItem.Update(CommandHandler commandHandler)
+        void ICommandUiItem.Update(CommandHandlerWrapper commandHandler)
         {
             if (_command != null && _command.CommandDefinition.IsList && !IsListItem)
             {
@@ -73,7 +73,7 @@ namespace Gemini.Modules.MainMenu.Models
                 _listItems.Clear();
 
                 var listCommands = new List<Command>();
-                commandHandler.Update(_command, listCommands);
+                commandHandler.Populate(_command, listCommands);
 
                 _command.Visible = false;
 
